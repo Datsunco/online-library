@@ -1,19 +1,29 @@
-import { UserState, UserAction, UserActionTypes} from "@/types/todos"
+import { IUser } from "@/models/User";
+import { createSlice, PayloadAction} from "@reduxjs/toolkit"
+
+
+export interface UserState {
+    users: IUser[];
+    loading: boolean;
+    error: null | string;
+    count: number;
+}
 
 const initialState: UserState = {
     users: [],
     loading: false,
-    error: null
+    error: null,
+    count: 0
 }
 
-
-export const userReducer = (state = initialState, action: UserAction): UserState => {
-    switch (action.type) {
-        case UserActionTypes.FETCH_USERS:
-            return { loading: true, error: null, users: [] }
-        case UserActionTypes.FETCH_USERS_SUCCESS:
-            return { loading: true, error: null, users: action.payload }
-        default:
-            return state
+export const userReducer = createSlice({
+    name: 'user',
+    initialState,
+    reducers: {
+        increment(state, action: PayloadAction<number>){
+            state.count += action.payload
+        }
     }
-} 
+})
+
+export default userReducer.reducer
