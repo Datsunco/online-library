@@ -5,7 +5,7 @@ import BookCard from "@/components/custom/Bookcard";
 import { ButtonLoading } from "@/components/loadingButton";
 import { useAppDispath, useAppSelector } from "@/hooks/redux";
 import { fetchAllBooks, fetchMoreBooks } from "@/store/reducers/ActionCreators";
-import { useEffect, useState, useRef} from "react";
+import { useEffect, useState, useRef } from "react";
 
 const SearchPage = () => {
     const searchInput = useRef(null)
@@ -37,7 +37,7 @@ const SearchPage = () => {
 
 
     useEffect(() => {
-        
+
     }, [counter, books])
 
 
@@ -47,13 +47,14 @@ const SearchPage = () => {
                 <Input ref={searchInput} id="myInput" value={searchData} onKeyDown={(e) => onKeyDown(e)} onChange={(e) => setSearchData(e.target.value)} />
                 <Button variant={'default'} onClick={() => onClickSearchButton()}>Найти</Button>
             </div>
-            {count != 0 ?
-                <div>Всего {count} Книг</div>
-                :
-                null
-            }
-
-            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+            <div style={{justifyContent: 'center', display: 'flex', marginBottom: '20px'}}>
+                {count != 0 ?
+                    <div>Всего {count} Книг</div>
+                    :
+                    null
+                }
+            </div>
+            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {!isLoading ?
                     <>
                         {books && books.map((book, index) => {
@@ -76,7 +77,7 @@ const SearchPage = () => {
                     </>
                 }
             </div>
-            <div style={{ margin: 'auto', width: '100px' }}>
+            <div style={{ margin: 'auto', width: '100px', marginTop: '50px' }}>
                 {isLoading ?
                     <ButtonLoading />
                     :
