@@ -25,20 +25,6 @@ export const bookSlicer = createSlice({
         booksFetching(state) {
             state.isLoading = true
         },
-        booksFetchingSuccess(state, action: PayloadAction<IBook[]>) {
-            state.isLoading = false
-            state.error = ''
-            state.books = action.payload
-        },
-        booksFetchingError(state, action: PayloadAction<string>) {
-            state.isLoading = false
-            state.error = action.payload
-        },
-        booksAppend(state, action: PayloadAction<IBook[]>) {
-            // state.books = [...state.books];
-            action.payload.forEach(element => state.books.push(element))
-        },
-
     },
     extraReducers: (builder) => {
         builder.addCase(fetchMoreBooks.fulfilled, (state, action) => {
@@ -51,6 +37,10 @@ export const bookSlicer = createSlice({
             state.books = action.payload.items
             state.isLoading = false
             state.error = ''
+            state.count = action.payload.totalItems
+        }),
+        builder.addCase(fetchAllBooks.pending, (state) => {
+            state.isLoading = true
         })
       },
         
