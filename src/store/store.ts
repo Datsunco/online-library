@@ -1,15 +1,17 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
-import userReducer from "./reducers/userReducer"
 import bookSlicer from "./reducers/bookSlicer"
+import { bookAPI } from "@/services/bookService"
 
 const rootReducer = combineReducers({
-    userReducer,
-    bookSlicer
+    bookSlicer,
+    [bookAPI.reducerPath]: bookAPI.reducer
 })
 
 export const setUpStore = () =>{
     return configureStore({
-        reducer: rootReducer
+        reducer: rootReducer,
+        middleware: (getDefaultMiddleware) => 
+            getDefaultMiddleware().concat(bookAPI.middleware)
     })
 }
 

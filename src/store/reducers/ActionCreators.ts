@@ -1,25 +1,46 @@
 import { IBook } from "@/models/Book";
-import { AppDispatch } from "..";
+import { AppDispatch } from "../store";
 import axios from "axios";
 import {bookSlicer} from "./bookSlicer";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
-export const fetchBooks = () => async (dispatch: AppDispatch) => {
-    try{
-        dispatch(bookSlicer.actions.booksFetching())
-        const response = await axios.get<IBook[]>('https://www.googleapis.com/books/v1/volumes?q=intitle:The+Great+Gatsby')
-        console.log(response.data)
-        dispatch(bookSlicer.actions.booksFetchingSuccess(response.data))
-    }catch(e){
-        // dispatch(bookSlicer.actions.booksFetchingError(e.message))
-    }    
+interface reqDataType {
+    search: string,
+    count: number
 }
 
-// export const fetchBooks = createAsyncThunk(
-//     'books/fetchAll',
-//     async (_, thunkApi) => {
-//         const response = await axios.get<IBook[]>('https://www.googleapis.com/books/v1/volumes?q=intitle:The+Great+Gatsby')
-//         return response.data
+interface BookResp{
+    items: IBook[],
+    kind: string,
+    totalItems: number
+}
 
-//     }
-// )
+export const fetchMoreBooks = createAsyncThunk(
+    'books/fetchMore',
+    async (reqData: reqDataType, thunkApi) => {
+        try{
+            const {search, count} = reqData
+            const response = await axios.get<BookResp>(`https://www.googleapis.com/books/v1/volumes?q=intitle:${search.replace(/\s/g, '+')}&startIndex=${(count-1)*30}&maxResults=${30}`)
+            return response.data
+        } catch(e){
+            return thunkApi.rejectWithValue('Произошла беда')
+        }
+        
+
+    }
+)
+
+export const fetchAllBooks = createAsyncThunk(
+    'books/fetchAll',
+    async (reqData: reqDataType, thunkApi) => {
+        try{
+            const {search, count} = reqData
+            const response = await axios.get<BookResp>(`https://www.googleapis.com/books/v1/volumes?q=intitle:${search.replace(/\s/g, '+')}&startIndex=${(count-1)*30}&maxResults=${30}`)
+            return response.data
+        } catch(e){
+            return thunkApi.rejectWithValue('Произошла беда')
+        }
+        
+
+    }
+)

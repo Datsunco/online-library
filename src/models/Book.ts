@@ -1,6 +1,11 @@
 export interface IBook {
     id: number,
-    name: string,
-    author: string,
-    category: string,
+    volumeInfo: {
+        categories: string[],
+        title: string,
+        authors: string
+        imageLinks: {
+            thumbnail: string | null
+        }
+    }
 }

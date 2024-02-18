@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
 import { Provider } from 'react-redux'
-import { setUpStore } from './store/index.ts'
+import { setUpStore } from './store/store.ts'
 import './styles/styles.css'
 
 const store = setUpStore()

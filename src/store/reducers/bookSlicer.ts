@@ -1,7 +1,7 @@
 import { IBook } from "@/models/Book"
 import { createSlice } from "@reduxjs/toolkit"
 import { PayloadAction } from "@reduxjs/toolkit";
-import { fetchBooks } from "./ActionCreators";
+import { fetchAllBooks, fetchMoreBooks } from "./ActionCreators";
 
 export interface BookState{
     books: IBook[];
@@ -34,19 +34,26 @@ export const bookSlicer = createSlice({
             state.isLoading = false
             state.error = action.payload
         },
+        booksAppend(state, action: PayloadAction<IBook[]>) {
+            // state.books = [...state.books];
+            action.payload.forEach(element => state.books.push(element))
+        },
+
     },
-    // extraReducers: {
-    //     [fetchBooks.fulfilled.type]: (state, action: PayloadAction<IBook[]>){
-    //         state.isLoading = false
-    //         state.error = ''
-    //         state.books = action.payload
-    //     },
-    //     [fetchBooks.rejected.type]: (state, action: PayloadAction<IBook[]>){
-    //         state.isLoading = false
-    //         state.error = ''
-    //         state.books = action.payload
-    //     },
-    // }
+    extraReducers: (builder) => {
+        builder.addCase(fetchMoreBooks.fulfilled, (state, action) => {
+            let concatedbooks = state.books.concat(action.payload.items)
+            state.isLoading = false
+            state.error = ''
+            state.books = concatedbooks
+        }),
+        builder.addCase(fetchAllBooks.fulfilled, (state, action) => {
+            state.books = action.payload.items
+            state.isLoading = false
+            state.error = ''
+        })
+      },
+        
 })
 
 export default bookSlicer.reducer
