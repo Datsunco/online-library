@@ -1,6 +1,13 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import {
+    Select,
+    SelectContent,
+    SelectItem,
+    SelectTrigger,
+    SelectValue,
+} from "@/components/ui/select"
 import BookCard from "@/components/custom/Bookcard";
 import { ButtonLoading } from "@/components/loadingButton";
 import { useAppDispath, useAppSelector } from "@/hooks/redux";
@@ -47,9 +54,25 @@ const SearchPage = () => {
                 <Input ref={searchInput} id="myInput" value={searchData} onKeyDown={(e) => onKeyDown(e)} onChange={(e) => setSearchData(e.target.value)} />
                 <Button variant={'default'} onClick={() => onClickSearchButton()}>Найти</Button>
             </div>
-            <div style={{justifyContent: 'center', display: 'flex', marginBottom: '20px'}}>
+            <div style={{ justifyContent: 'center', display: 'flex', marginBottom: '20px' }}>
                 {count != 0 ?
-                    <div>Всего {count} Книг</div>
+                    <>
+                        <div>Всего {count} Книг</div>
+                        <Select>
+                            <SelectTrigger className="w-[180px]">
+                                <SelectValue placeholder="All" />
+                            </SelectTrigger>
+                            <SelectContent>
+                                <SelectItem value="all">All</SelectItem>
+                                <SelectItem value="art">Art</SelectItem>
+                                <SelectItem value="biography">Biography</SelectItem>
+                                <SelectItem value="computers">Computers</SelectItem>
+                                <SelectItem value="history">History</SelectItem>
+                                <SelectItem value="medical">Medical</SelectItem>
+                                <SelectItem value="poetry">Poetry</SelectItem>
+                            </SelectContent>
+                        </Select>
+                    </>
                     :
                     null
                 }
