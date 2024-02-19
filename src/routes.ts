@@ -1,5 +1,4 @@
 import SearchPage from "./pages/SearchPage";
-import TestPage from "./pages/TestPage";
 import SeparatePage from "./pages/separatePage";
 
 export const publicRoutes = [
@@ -10,11 +9,6 @@ export const publicRoutes = [
     {
         path:  '/book/:id',
         Component: SeparatePage 
-
-    },
-    {
-        path:  '/test',
-        Component: TestPage 
 
     },
 ]

@@ -1,6 +1,6 @@
 import { useAppDispath, useAppSelector } from '@/hooks/redux';
 import { fetchCurrentBook } from '@/store/reducers/ActionCreators';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const SeparatePage = () => {
