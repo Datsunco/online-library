@@ -7,9 +7,9 @@ const AppRouter = () => {
         <div>
             <Routes>
                 {publicRoutes.map(({ path, Component }) =>
-                    <Route key={path} path={path} element={<Component />} />
+                    <Route key={path} path={path} element={<Component/>} />
                 )}
-                <Route path="*" element={<Navigate to="/mainpage" />} />
+                <Route path="*" element={<Navigate to="/main" />} />
             </Routes>
         </div>
     );

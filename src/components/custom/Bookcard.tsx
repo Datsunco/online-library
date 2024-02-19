@@ -4,17 +4,18 @@ import { Card, CardHeader, CardTitle, CardDescription} from "../ui/card"
 import { Badge } from '../ui/badge';
 
 interface BookItemProps {
-    book: IBook
+    book: IBook,
+    onClick?: React.MouseEventHandler<HTMLElement>
 }
 
-const BookCard: FC<BookItemProps> = ({ book }) => {
+const BookCard: FC<BookItemProps> = ({ book, onClick}) => {
 
     // useEffect(() => {
     //     console.log(book)
     // })
 
     return (
-            <Card className="w-[250px]">
+            <Card className="w-[250px]" onClick={onClick}>
                 <CardHeader>
                     <div style={{minHeight:'150px'}}>
                     <img className="max-w-[100px] max-h-[150px]" src={ book.volumeInfo.imageLinks?.thumbnail ? book.volumeInfo.imageLinks?.thumbnail : 'http://books.google.com/books/content?id=ZGGLDwAAQBAJ&printsec=frontcover&img=1&zoom=1&edge=curl&source=gbs_api'}/>

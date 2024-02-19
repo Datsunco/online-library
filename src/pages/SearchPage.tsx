@@ -13,8 +13,11 @@ import { ButtonLoading } from "@/components/loadingButton";
 import { useAppDispath, useAppSelector } from "@/hooks/redux";
 import { fetchAllBooks, fetchMoreBooks } from "@/store/reducers/ActionCreators";
 import { useEffect, useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { IBook } from "@/models/Book";
 
 const SearchPage = () => {
+    const navigate = useNavigate()
     const searchInput = useRef(null)
     const [searchData, setSearchData] = useState('')
     const [counter, setCounter] = useState(0)
@@ -22,18 +25,22 @@ const SearchPage = () => {
     const { books, isLoading, count } = useAppSelector(state => state.bookSlicer)
 
     const onClickSearchButton = () => {
-        dispatch(fetchAllBooks({
-            search: searchData,
-            count: 1
-        }))
+        dispatch(
+            fetchAllBooks({
+                search: searchData,
+                count: 1
+            })
+        )
         setCounter(1)
     }
 
     const onClickLoadMoreButton = () => {
-        dispatch(fetchMoreBooks({
-            search: searchData,
-            count: counter + 1
-        }))
+        dispatch(
+            fetchMoreBooks({
+                search: searchData,
+                count: counter + 1
+            })
+        )
         setCounter(counter + 1)
     }
 
@@ -41,7 +48,10 @@ const SearchPage = () => {
         if (e.key == 'Enter') onClickSearchButton();
     }
 
-
+    const onClickBookCard = (book: IBook) => {
+        navigate(`/book/${book.id}`)
+        console.log('bavigate', `/book/${book.id}`)
+    }
 
     useEffect(() => {
 
@@ -82,7 +92,7 @@ const SearchPage = () => {
                     <>
                         {books && books.map((book, index) => {
                             return (
-                                <BookCard key={index} book={book} />
+                                <BookCard key={index} book={book} onClick={() => onClickBookCard(book)} />
                             )
                         })}
                     </>
