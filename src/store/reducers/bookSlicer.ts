@@ -1,7 +1,7 @@
 import { IBook } from "@/models/Book"
 import { createSlice } from "@reduxjs/toolkit"
 import { PayloadAction } from "@reduxjs/toolkit";
-import { fetchAllBooks, fetchMoreBooks } from "./ActionCreators";
+import { fetchAllBooks, fetchCurrentBook, fetchMoreBooks } from "./ActionCreators";
 
 export interface BookState{
     books: IBook[];
@@ -19,7 +19,7 @@ const initialState: BookState = {
 
 
 export const bookSlicer = createSlice({
-    name: 'book',
+    name: 'books',
     initialState,
     reducers: {
         booksFetching(state) {
@@ -32,6 +32,9 @@ export const bookSlicer = createSlice({
             state.isLoading = false
             state.error = ''
             state.books = concatedbooks
+        }),
+        builder.addCase(fetchCurrentBook.fulfilled, (state, action) => {
+            
         }),
         builder.addCase(fetchAllBooks.fulfilled, (state, action) => {
             state.books = action.payload.items

@@ -1,17 +1,22 @@
+import { useAppDispath, useAppSelector } from '@/hooks/redux';
+import { fetchCurrentBook } from '@/store/reducers/ActionCreators';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 const SeparatePage = () => {
-
+    const {title, image} = useAppSelector(state => state.currentBooksSlicer)
     const { id } = useParams()
+    const dispatch = useAppDispath()
 
     useEffect(() => {
-        console.log('cjhck', id)
-    })
+        dispatch(fetchCurrentBook(id!))
+    }, [])
 
     return (
         <div>
-            Dick
+            <img src={image}/>
+            {title}
+            {id}
         </div>
     );
 };
