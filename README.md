@@ -16,7 +16,7 @@
 
 ## [Демо](https://github.com/Datsunco/online-library)
 
-![chrome_Pl9cbyDiGg](https://s9.gifyu.com/images/SF9gF.gif)
+[![SF9gF.gif](https://s9.gifyu.com/images/SF9gF.gif)](https://gifyu.com/image/SF9gF)
 
 <h2 align="center">Запуск проекта</h2>
 
