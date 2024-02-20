@@ -17,12 +17,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { IBook } from "@/models/Book";
 
 const SearchPage = () => {
-    const { text, categor } = useParams()
+    const { text, categor, order} = useParams()
     const navigate = useNavigate()
     const searchInput = useRef(null)
 
     const [counter, setCounter] = useState(0)
     const [category, setCategory] = useState<string>(categor || 'all')
+    const [orders, setOrder] = useState<string>('relevance')
     const [searchData, setSearchData] = useState<string>(text || '')
 
     const dispatch = useAppDispath()
@@ -30,12 +31,13 @@ const SearchPage = () => {
 
     const onClickSearchButton = () => {
         if (searchData) {
-            navigate(`/search/${searchData}/${category}`)
+            navigate(`/search/${searchData}/${category}/${orders}`)
             dispatch(
                 fetchAllBooks({
                     search: searchData,
                     count: 1,
-                    category: category
+                    category: category,
+                    order: orders
                 })
             )
 
@@ -49,7 +51,8 @@ const SearchPage = () => {
                 fetchMoreBooks({
                     search: searchData,
                     count: counter + 1,
-                    category: category
+                    category: category,
+                    order: orders
                 })
             )
             setCounter(counter + 1)
@@ -67,10 +70,25 @@ const SearchPage = () => {
                 fetchAllBooks({
                     search: searchData,
                     count: 1,
-                    category: category
+                    category: category,
+                    order: orders
                 })
             )
-        navigate(`/search/${searchData}/${category}`)
+        navigate(`/search/${searchData}/${category}/${orders}`)
+    }
+
+    const onOrderChange = (order: string) => {
+        setOrder(order)
+        if (searchData)
+            dispatch(
+                fetchAllBooks({
+                    search: searchData,
+                    count: 1,
+                    category: category,
+                    order: order
+                })
+            )
+        navigate(`/search/${searchData}/${category}/${order}`)
     }
 
     const onClickBookCard = (book: IBook) => {
@@ -78,9 +96,12 @@ const SearchPage = () => {
     }
 
     useEffect(() => {
-        if (categor)
+        if (categor && order){
             setCategory(categor)
-    }, [])
+            setOrder(order)
+        }
+        
+    }, [categor, order])
 
 
     return (
@@ -105,7 +126,7 @@ const SearchPage = () => {
                         <SelectItem value="poetry">Poetry</SelectItem>
                     </SelectContent>
                 </Select>
-                <Select onValueChange={(e) => onCategoryChange(e)}>
+                <Select value={order} onValueChange={(e) => onOrderChange(e)}>
                     <SelectTrigger className="w-[180px]">
                         <SelectValue placeholder="Relevance" />
                     </SelectTrigger>

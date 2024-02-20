@@ -7,7 +7,7 @@ export const publicRoutes = [
         Component: SearchPage
     },
     {
-        path: '/search/:text?/:categor?',
+        path: '/search/:text?/:categor?/:order?',
         Component: SearchPage
     },
     {
