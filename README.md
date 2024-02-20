@@ -1,4 +1,6 @@
 <h1 align="center">В проекте использутся такие технологии как</h1>
+
+## [Front-end](https://github.com/Datsunco/online-library)
   
 ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
 ![](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
@@ -11,6 +13,10 @@
 <h2 align="center">За чистотой кода следят</h2>
 
 ![](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
+
+<h2 align="center">Демо</h2>
+
+![chrome_Pl9cbyDiGg](https://sun9-67.userapi.com/impg/stTsXNq6AVplsHVF-Kt6MOm_IszRe_atu5iVFg/sdnZRM2CiL0.jpg?size=2448x1440&quality=96&sign=f3f5f0343f4fc8c0588ca21af289ae36&type=album)
 
 <h2 align="center">Запуск проекта</h2>
 
