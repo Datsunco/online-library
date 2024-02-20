@@ -84,7 +84,7 @@ const SearchPage = () => {
 
 
     return (
-        <div>
+        <div className="mt-[50px]">
             <div className="flex max-w-[600px] h-[80px] mt-[50px]" style={{ margin: 'auto'}}>
                 <Input ref={searchInput} id="myInput" value={searchData} onKeyDown={(e) => onKeyDown(e)} onChange={(e) => setSearchData(e.target.value)} />
                 <Button variant={'default'} onClick={() => onClickSearchButton()}>Найти</Button>
@@ -103,6 +103,15 @@ const SearchPage = () => {
                         <SelectItem value="history">History</SelectItem>
                         <SelectItem value="medical">Medical</SelectItem>
                         <SelectItem value="poetry">Poetry</SelectItem>
+                    </SelectContent>
+                </Select>
+                <Select onValueChange={(e) => onCategoryChange(e)}>
+                    <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="Relevance" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="relevance">Relevance</SelectItem>
+                        <SelectItem value="newest">Newest</SelectItem>
                     </SelectContent>
                 </Select>
                 {count != 0 ?
