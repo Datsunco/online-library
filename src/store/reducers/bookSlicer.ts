@@ -25,7 +25,6 @@ export const bookSlicer = createSlice({
     reducers: {
         setSearch(state, action: PayloadAction<string>) {
             state.search = action.payload
-            console.log('test', action.payload)
         },
     },
     extraReducers: (builder) => {

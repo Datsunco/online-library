@@ -10,10 +10,6 @@ interface BookItemProps {
 
 const BookCard: FC<BookItemProps> = ({ book, onClick}) => {
 
-    // useEffect(() => {
-    //     console.log(book)
-    // })
-
     return (
             <Card className="w-[250px]" onClick={onClick}>
                 <CardHeader>

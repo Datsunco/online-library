@@ -15,7 +15,6 @@ import { fetchAllBooks, fetchMoreBooks } from "@/store/reducers/ActionCreators";
 import { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { IBook } from "@/models/Book";
-// import { bookSlicer } from "@/store/reducers/bookSlicer";
 
 const SearchPage = () => {
     const { text, categor } = useParams()
@@ -27,13 +26,11 @@ const SearchPage = () => {
     const [searchData, setSearchData] = useState<string>(text || '')
 
     const dispatch = useAppDispath()
-    // const {setSearch} = bookSlicer.actions
     const { books, isLoading, count } = useAppSelector(state => state.bookSlicer)
 
     const onClickSearchButton = () => {
         if (searchData) {
             navigate(`/search/${searchData}/${category}`)
-            // dispatch(setSearch(searchData))
             dispatch(
                 fetchAllBooks({
                     search: searchData,
@@ -83,7 +80,6 @@ const SearchPage = () => {
     useEffect(() => {
         if (categor)
             setCategory(categor)
-        // setSearchData(text!)
     }, [])
 
 
