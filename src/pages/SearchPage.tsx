@@ -23,8 +23,8 @@ const SearchPage = () => {
     const searchInput = useRef(null)
     
     const [counter, setCounter] = useState(0)
-    const [category, setCategory] = useState<string>('none')
-    const [searchData, setSearchData] = useState<string>('')
+    const [category, setCategory] = useState<string>('all')
+    const [searchData, setSearchData] = useState<string>(text || '')
     
     const dispatch = useAppDispath()
     // const {setSearch} = bookSlicer.actions
@@ -32,6 +32,7 @@ const SearchPage = () => {
 
     const onClickSearchButton = () => {
         navigate(`/search/${searchData}/${category}`)
+        console.log(`/search/${searchData}/${category}`)
         // dispatch(setSearch(searchData))
         dispatch(
             fetchAllBooks({
@@ -80,8 +81,8 @@ const SearchPage = () => {
 
     useEffect(() => {
         console.log(text, categor)
-        setCategory(categor!)
-        setSearchData(text!)
+        // setCategory(categor!)
+        // setSearchData(text!)
     }, [counter, books, search])
 
 
@@ -98,7 +99,7 @@ const SearchPage = () => {
                         <SelectValue placeholder="All" />
                     </SelectTrigger>
                     <SelectContent>
-                        <SelectItem value="none">All</SelectItem>
+                        <SelectItem value="all">All</SelectItem>
                         <SelectItem value="art">Art</SelectItem>
                         <SelectItem value="biography">Biography</SelectItem>
                         <SelectItem value="computers">Computers</SelectItem>
