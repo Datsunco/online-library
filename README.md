@@ -15,8 +15,8 @@
 ![](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
 
 ## [Демо](https://github.com/Datsunco/online-library)
+![online-library](https://github.com/Datsunco/online-library/assets/124267923/a66a60f0-7a50-4e9f-94ce-1be2f2eb18b3)
 
-[![SF9gF.gif](https://s9.gifyu.com/images/SF9gF.gif)](https://gifyu.com/image/SF9gF)
 
 <h2 align="center">Запуск проекта</h2>
 
