@@ -1,30 +1,41 @@
-# React + TypeScript + Vite
+<h1 align="center">В проекте использутся такие технологии как</h1>
+  
+![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
+![](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)
+![](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+<h2 align="center">За чистотой кода следят</h2>
 
-Currently, two official plugins are available:
+![](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+<h2 align="center">Запуск проекта</h2>
 
-## Expanding the ESLint configuration
+для запуска проекта необходимо склонировать репозиторий
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```
+git clone https://github.com/Datsunco/online-library.git
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+запустить проект в режиме разработки
+
+```node
+npm i
+
+npm run dev
+```
+
+таким образом запустится client на порту `5173`
+
+
+<h2 align="center"><Полезные скрипты на проекте</h2>
+
+- `dev` запускает клиент
+- `build` собирает проект в папке `dist` (html / css / js)
+- `lint` проверяет код на наличие `ESLint` / `StyleLint` предупреждений и форматирует код с помощью `prettier` 
+- `new` команда для создания FSD слайсов
+- `storybook` открывает страницу со сторибуком
+
+  ___
+
