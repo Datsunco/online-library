@@ -23,7 +23,7 @@ const SearchPage = () => {
     const searchInput = useRef(null)
     
     const [counter, setCounter] = useState(0)
-    const [category, setCategory] = useState<string>('all')
+    const [category, setCategory] = useState<string>(categor || 'all')
     const [searchData, setSearchData] = useState<string>(text || '')
     
     const dispatch = useAppDispath()
@@ -32,7 +32,6 @@ const SearchPage = () => {
 
     const onClickSearchButton = () => {
         navigate(`/search/${searchData}/${category}`)
-        console.log(`/search/${searchData}/${category}`)
         // dispatch(setSearch(searchData))
         dispatch(
             fetchAllBooks({
@@ -70,20 +69,18 @@ const SearchPage = () => {
                     category: category
                 })
             )
-
         navigate(`/search/${searchData}/${category}`)
     }
 
     const onClickBookCard = (book: IBook) => {
         navigate(`/book/${book.id}`)
-        console.log('bavigate', `/book/${book.id}`)
     }
 
     useEffect(() => {
-        console.log(text, categor)
-        // setCategory(categor!)
+        if ( categor )
+            setCategory(categor)
         // setSearchData(text!)
-    }, [counter, books, search])
+    }, [])
 
 
     return (

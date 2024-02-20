@@ -8,7 +8,6 @@ import { useParams } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';
 import { Skeleton } from '@/components/ui/skeleton';
 import DOMPurify from 'dompurify';
-import {bookSlicer} from '@/store/reducers/bookSlicer';
 
 const SeparatePage = () => {
     const { id } = useParams()
