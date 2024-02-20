@@ -26,10 +26,8 @@ const SeparatePage = () => {
             {!isLoading ?
                 <div className="w-[600px] flex flex-col gap-3">
                     <Badge>{categories} </Badge>
-                    {/* <Label htmlFor="framework"> {categories} </Label> */}
                     <Label htmlFor="title"> {title} </Label>
                     <Badge variant="outline">{authors} </Badge>
-                    {/* <Textarea className='h-fulll' disabled={true} placeholder={description}/> */}
                     <Card>
                         <CardContent>
                             <div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(description)}}/>

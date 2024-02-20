@@ -85,7 +85,7 @@ const SearchPage = () => {
 
     return (
         <div>
-            <div style={{ display: 'flex', maxWidth: '600px', height: '80px', margin: 'auto', marginTop: '50px' }}>
+            <div className="flex max-w-[600px] h-[80px] mt-[50px]" style={{ margin: 'auto'}}>
                 <Input ref={searchInput} id="myInput" value={searchData} onKeyDown={(e) => onKeyDown(e)} onChange={(e) => setSearchData(e.target.value)} />
                 <Button variant={'default'} onClick={() => onClickSearchButton()}>Найти</Button>
             </div>
@@ -137,7 +137,7 @@ const SearchPage = () => {
                     </>
                 }
             </div>
-            <div style={{ margin: 'auto', width: '100px', marginTop: '50px' }}>
+            <div className="w-[100px] mt-[50px]" style={{ margin: 'auto'}}>
                 {isLoading ?
                     <ButtonLoading />
                     :
