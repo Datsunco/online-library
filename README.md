@@ -2,6 +2,8 @@
   
 ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white)
 ![](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-blue?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![shadcn ui](https://img.shields.io/badge/shadcn_ui-black?style=for-the-badge&logo=shadcnui&logoColor=white)
 ![](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)
 ![](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
@@ -33,9 +35,6 @@ npm run dev
 
 - `dev` запускает клиент
 - `build` собирает проект в папке `dist` (html / css / js)
-- `lint` проверяет код на наличие `ESLint` / `StyleLint` предупреждений и форматирует код с помощью `prettier` 
-- `new` команда для создания FSD слайсов
-- `storybook` открывает страницу со сторибуком
 
   ___
 
