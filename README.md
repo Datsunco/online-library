@@ -15,7 +15,7 @@
 ![](https://img.shields.io/badge/eslint-3A33D1?style=for-the-badge&logo=eslint&logoColor=white)
 
 ## [Демо](https://github.com/Datsunco/online-library)
-![online-library](https://github.com/Datsunco/online-library/assets/124267923/a66a60f0-7a50-4e9f-94ce-1be2f2eb18b3)
+![Search books, группа учеба — Яндекс Браузер 2024-02-20 22-07-59 (online-video-cutter com) (1)](https://github.com/Datsunco/online-library/assets/124267923/3383fd3d-7069-444d-9301-a35b9a4cebb8)
 
 
 <h2 align="center">Запуск проекта</h2>
