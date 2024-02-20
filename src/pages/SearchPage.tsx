@@ -12,47 +12,51 @@ import BookCard from "@/components/custom/Bookcard";
 import { ButtonLoading } from "@/components/loadingButton";
 import { useAppDispath, useAppSelector } from "@/hooks/redux";
 import { fetchAllBooks, fetchMoreBooks } from "@/store/reducers/ActionCreators";
-import { useEffect, useState, useRef} from "react";
-import { useNavigate, useParams} from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { IBook } from "@/models/Book";
 // import { bookSlicer } from "@/store/reducers/bookSlicer";
 
 const SearchPage = () => {
-    const { text, categor} = useParams()
+    const { text, categor } = useParams()
     const navigate = useNavigate()
     const searchInput = useRef(null)
-    
+
     const [counter, setCounter] = useState(0)
     const [category, setCategory] = useState<string>(categor || 'all')
     const [searchData, setSearchData] = useState<string>(text || '')
-    
+
     const dispatch = useAppDispath()
     // const {setSearch} = bookSlicer.actions
-    const { books, isLoading, count, search} = useAppSelector(state => state.bookSlicer)
+    const { books, isLoading, count } = useAppSelector(state => state.bookSlicer)
 
     const onClickSearchButton = () => {
-        navigate(`/search/${searchData}/${category}`)
-        // dispatch(setSearch(searchData))
-        dispatch(
-            fetchAllBooks({
-                search: searchData,
-                count: 1,
-                category: category
-            })
-        )
-        
-        setCounter(1)
+        if (searchData) {
+            navigate(`/search/${searchData}/${category}`)
+            // dispatch(setSearch(searchData))
+            dispatch(
+                fetchAllBooks({
+                    search: searchData,
+                    count: 1,
+                    category: category
+                })
+            )
+
+            setCounter(1)
+        }
     }
 
     const onClickLoadMoreButton = () => {
-        dispatch(
-            fetchMoreBooks({
-                search: searchData,
-                count: counter + 1,
-                category: category
-            })
-        )
-        setCounter(counter + 1)
+        if (count > counter * 30) {
+            dispatch(
+                fetchMoreBooks({
+                    search: searchData,
+                    count: counter + 1,
+                    category: category
+                })
+            )
+            setCounter(counter + 1)
+        }
     }
 
     const onKeyDown = (e: any) => {
@@ -77,7 +81,7 @@ const SearchPage = () => {
     }
 
     useEffect(() => {
-        if ( categor )
+        if (categor)
             setCategory(categor)
         // setSearchData(text!)
     }, [])
@@ -141,7 +145,7 @@ const SearchPage = () => {
                 {isLoading ?
                     <ButtonLoading />
                     :
-                    <Button disabled={search == '' ? true : false} onClick={() => onClickLoadMoreButton()}>
+                    <Button disabled={( books && books.length == 0) || (count < counter * 30) ? true : false} onClick={() => onClickLoadMoreButton()}>
                         Load more
                     </Button>}
             </div>

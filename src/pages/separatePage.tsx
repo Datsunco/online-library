@@ -2,7 +2,6 @@ import { useAppDispath, useAppSelector } from '@/hooks/redux';
 import { fetchCurrentBook } from '@/store/reducers/ActionCreators';
 import { Label } from "@/components/ui/label"
 import { Badge } from '@/components/ui/badge';
-import { Textarea } from "@/components/ui/textarea"
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Card, CardContent } from '@/components/ui/card';

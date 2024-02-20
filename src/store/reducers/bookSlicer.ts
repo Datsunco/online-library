@@ -41,6 +41,9 @@ export const bookSlicer = createSlice({
             state.error = ''
             state.count = action.payload.totalItems
         }),
+        builder.addCase(fetchMoreBooks.pending, (state) => {
+            state.isLoading = true
+        }),
         builder.addCase(fetchAllBooks.pending, (state) => {
             state.isLoading = true
         })
