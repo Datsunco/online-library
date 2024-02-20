@@ -1,5 +1,5 @@
 import { IBook } from "@/models/Book"
-import { createSlice } from "@reduxjs/toolkit"
+import { PayloadAction, createSlice } from "@reduxjs/toolkit"
 import { fetchAllBooks, fetchMoreBooks } from "./ActionCreators";
 
 export interface BookState{
@@ -7,6 +7,7 @@ export interface BookState{
     isLoading: boolean;
     error: null | string;
     count: number;
+    search: string;
 }
 
 const initialState: BookState = {
@@ -14,6 +15,7 @@ const initialState: BookState = {
     isLoading: false,
     error: '',
     count: 0,
+    search: ''
 }
 
 
@@ -21,8 +23,9 @@ export const bookSlicer = createSlice({
     name: 'books',
     initialState,
     reducers: {
-        booksFetching(state) {
-            state.isLoading = true
+        setSearch(state, action: PayloadAction<string>) {
+            state.search = action.payload
+            console.log('test', action.payload)
         },
     },
     extraReducers: (builder) => {

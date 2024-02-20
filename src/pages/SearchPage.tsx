@@ -12,25 +12,35 @@ import BookCard from "@/components/custom/Bookcard";
 import { ButtonLoading } from "@/components/loadingButton";
 import { useAppDispath, useAppSelector } from "@/hooks/redux";
 import { fetchAllBooks, fetchMoreBooks } from "@/store/reducers/ActionCreators";
-import { useEffect, useState, useRef } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState, useRef} from "react";
+import { useNavigate, useParams} from "react-router-dom";
 import { IBook } from "@/models/Book";
+// import { bookSlicer } from "@/store/reducers/bookSlicer";
 
 const SearchPage = () => {
+    const { text, categor} = useParams()
     const navigate = useNavigate()
     const searchInput = useRef(null)
-    const [searchData, setSearchData] = useState('')
+    
     const [counter, setCounter] = useState(0)
+    const [category, setCategory] = useState<string>('none')
+    const [searchData, setSearchData] = useState<string>('')
+    
     const dispatch = useAppDispath()
-    const { books, isLoading, count } = useAppSelector(state => state.bookSlicer)
+    // const {setSearch} = bookSlicer.actions
+    const { books, isLoading, count, search} = useAppSelector(state => state.bookSlicer)
 
     const onClickSearchButton = () => {
+        navigate(`/search/${searchData}/${category}`)
+        // dispatch(setSearch(searchData))
         dispatch(
             fetchAllBooks({
                 search: searchData,
-                count: 1
+                count: 1,
+                category: category
             })
         )
+        
         setCounter(1)
     }
 
@@ -38,7 +48,8 @@ const SearchPage = () => {
         dispatch(
             fetchMoreBooks({
                 search: searchData,
-                count: counter + 1
+                count: counter + 1,
+                category: category
             })
         )
         setCounter(counter + 1)
@@ -48,14 +59,30 @@ const SearchPage = () => {
         if (e.key == 'Enter') onClickSearchButton();
     }
 
+    const onCategoryChange = (category: string) => {
+        setCategory(category)
+        if (searchData)
+            dispatch(
+                fetchAllBooks({
+                    search: searchData,
+                    count: 1,
+                    category: category
+                })
+            )
+
+        navigate(`/search/${searchData}/${category}`)
+    }
+
     const onClickBookCard = (book: IBook) => {
         navigate(`/book/${book.id}`)
         console.log('bavigate', `/book/${book.id}`)
     }
 
     useEffect(() => {
-
-    }, [counter, books])
+        console.log(text, categor)
+        setCategory(categor!)
+        setSearchData(text!)
+    }, [counter, books, search])
 
 
     return (
@@ -64,30 +91,32 @@ const SearchPage = () => {
                 <Input ref={searchInput} id="myInput" value={searchData} onKeyDown={(e) => onKeyDown(e)} onChange={(e) => setSearchData(e.target.value)} />
                 <Button variant={'default'} onClick={() => onClickSearchButton()}>Найти</Button>
             </div>
-            <div style={{ justifyContent: 'center', display: 'flex', marginBottom: '20px' }}>
+
+            <div className="flex mb-[20px] justify-center gap-[15px]" >
+                <Select value={category} onValueChange={(e) => onCategoryChange(e)}>
+                    <SelectTrigger className="w-[180px]">
+                        <SelectValue placeholder="All" />
+                    </SelectTrigger>
+                    <SelectContent>
+                        <SelectItem value="none">All</SelectItem>
+                        <SelectItem value="art">Art</SelectItem>
+                        <SelectItem value="biography">Biography</SelectItem>
+                        <SelectItem value="computers">Computers</SelectItem>
+                        <SelectItem value="history">History</SelectItem>
+                        <SelectItem value="medical">Medical</SelectItem>
+                        <SelectItem value="poetry">Poetry</SelectItem>
+                    </SelectContent>
+                </Select>
                 {count != 0 ?
                     <>
                         <div>Всего {count} Книг</div>
-                        <Select>
-                            <SelectTrigger className="w-[180px]">
-                                <SelectValue placeholder="All" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="all">All</SelectItem>
-                                <SelectItem value="art">Art</SelectItem>
-                                <SelectItem value="biography">Biography</SelectItem>
-                                <SelectItem value="computers">Computers</SelectItem>
-                                <SelectItem value="history">History</SelectItem>
-                                <SelectItem value="medical">Medical</SelectItem>
-                                <SelectItem value="poetry">Poetry</SelectItem>
-                            </SelectContent>
-                        </Select>
+
                     </>
                     :
                     null
                 }
             </div>
-            <div style={{ display: 'flex', gap: '10px', flexWrap: 'wrap', justifyContent: 'center' }}>
+            <div className="flex gap-[10px] justify-center flex-wrap">
                 {!isLoading ?
                     <>
                         {books && books.map((book, index) => {
@@ -114,7 +143,7 @@ const SearchPage = () => {
                 {isLoading ?
                     <ButtonLoading />
                     :
-                    <Button disabled={counter == 0 ? true : false} onClick={() => onClickLoadMoreButton()}>
+                    <Button disabled={search == '' ? true : false} onClick={() => onClickLoadMoreButton()}>
                         Load more
                     </Button>}
             </div>

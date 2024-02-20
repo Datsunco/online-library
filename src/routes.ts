@@ -7,6 +7,10 @@ export const publicRoutes = [
         Component: SearchPage
     },
     {
+        path: '/search/:text?/:categor?',
+        Component: SearchPage
+    },
+    {
         path:  '/book/:id',
         Component: SeparatePage 
 

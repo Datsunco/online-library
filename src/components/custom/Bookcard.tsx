@@ -1,5 +1,5 @@
 import { IBook } from '@/models/Book';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
 import { Card, CardHeader, CardTitle, CardDescription} from "../ui/card"
 import { Badge } from '../ui/badge';
 
