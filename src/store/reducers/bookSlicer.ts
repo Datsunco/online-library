@@ -45,6 +45,14 @@ export const bookSlicer = createSlice({
         }),
         builder.addCase(fetchAllBooks.pending, (state) => {
             state.isLoading = true
+        }),
+        builder.addCase(fetchMoreBooks.rejected, (state:any, action) => {
+            state.error = action.payload
+            state.isLoading = false
+        }),
+        builder.addCase(fetchAllBooks.rejected, (state:any, action) => {
+            state.error = action.payload
+            state.isLoading = false
         })
       },
         

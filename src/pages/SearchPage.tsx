@@ -15,9 +15,13 @@ import { fetchAllBooks, fetchMoreBooks } from "@/store/reducers/ActionCreators";
 import { useEffect, useState, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { IBook } from "@/models/Book";
+import { useToast } from "@/components/ui/use-toast"
+import { Toaster } from "@/components/ui/toaster";
 
 const SearchPage = () => {
-    const { text, categor, order} = useParams()
+    const { toast } = useToast()
+
+    const { text, categor, order } = useParams()
     const navigate = useNavigate()
     const searchInput = useRef(null)
 
@@ -27,7 +31,7 @@ const SearchPage = () => {
     const [searchData, setSearchData] = useState<string>(text || '')
 
     const dispatch = useAppDispath()
-    const { books, isLoading, count } = useAppSelector(state => state.bookSlicer)
+    const { books, isLoading, count, error } = useAppSelector(state => state.bookSlicer)
 
     const onClickSearchButton = () => {
         if (searchData) {
@@ -96,17 +100,26 @@ const SearchPage = () => {
     }
 
     useEffect(() => {
-        if (categor && order){
+        if (categor && order) {
             setCategory(categor)
             setOrder(order)
         }
-        
-    }, [categor, order])
+
+        if (error) {
+            toast({
+                variant: "destructive",
+                title: error,
+                description: "Эта проблема связана с вашим запросом.",
+            })
+            console.log(error)
+        }
+
+    }, [categor, order, error])
 
 
     return (
         <div className="mt-[50px]">
-            <div className="flex max-w-[600px] h-[80px] mt-[50px]" style={{ margin: 'auto'}}>
+            <div className="flex max-w-[600px] h-[80px] mt-[50px]" style={{ margin: 'auto' }}>
                 <Input ref={searchInput} id="myInput" value={searchData} onKeyDown={(e) => onKeyDown(e)} onChange={(e) => setSearchData(e.target.value)} />
                 <Button variant={'default'} onClick={() => onClickSearchButton()}>Найти</Button>
             </div>
@@ -167,14 +180,15 @@ const SearchPage = () => {
                     </>
                 }
             </div>
-            <div className="w-[100px] mt-[50px]" style={{ margin: 'auto'}}>
+            <div className="w-[100px] mt-[50px]" style={{ margin: 'auto' }}>
                 {isLoading ?
                     <ButtonLoading />
                     :
-                    <Button disabled={( books && books.length == 0) || (count < counter * 30) ? true : false} onClick={() => onClickLoadMoreButton()}>
+                    <Button disabled={(books && books.length == 0) || (count < counter * 30) ? true : false} onClick={() => onClickLoadMoreButton()}>
                         Load more
                     </Button>}
             </div>
+            <Toaster />
         </div>
 
     );

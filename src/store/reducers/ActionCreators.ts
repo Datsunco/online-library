@@ -66,7 +66,7 @@ export const fetchAllBooks = createAsyncThunk(
             const response = await axios.get<AllBooksResp>(`https://www.googleapis.com/books/v1/volumes?q=${search.replace(/\s/g, '+')}${category == 'all' ? '' : '+subject:'+category}+intitle:${search.replace(/\s/g, '+')}&startIndex=${(count-1)*30}&maxResults=${30}&orderBy=${order}`)
             return response.data
         } catch(e){
-            return thunkApi.rejectWithValue('Произошла беда')
+            return thunkApi.rejectWithValue('Произошла ошибка')
         }
         
 
